@@ -25,10 +25,10 @@ class PyWorker(Worker):
         for arg in job.arguments():
             print "Arg", i, ":", arg
             i += 1
-        
+
         for key, value in job.matrix_arguments().items():
             print "Matrix Arg:", key, "=>", value
-        
+
         for key, value in job.query_params().items():
             print "Query Param:", key, "=>", value
 
@@ -37,7 +37,7 @@ class PyWorker(Worker):
 
         for key, value in job.environ().items():
             print "ENV:", key, "=>", value
-        
+
         print "status:", job.status()
         print "name:", job.name()
         print "base_uri:", job.base_uri()
