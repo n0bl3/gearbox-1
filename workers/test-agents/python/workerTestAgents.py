@@ -15,6 +15,7 @@ import sys
 import time
 
 from gearbox import Worker
+from gearbox import utils
 
 
 class WorkerTestAgentsPython(Worker):
@@ -67,7 +68,9 @@ class WorkerTestAgentsPython(Worker):
                 if run_status.has_completed():
                     break
             if not run_status.is_success():
-                err_code_class = eval("ERR_CODE_" + run_status.code())
+                err_code_class_name = "ERR_CODE_" + run_status.code()
+                err_code_class = __import__('gearbox',
+                                            fromlist=[err_code_class_name])
                 raise err_code_class(run_status.message())
         else:
             # operation == delete

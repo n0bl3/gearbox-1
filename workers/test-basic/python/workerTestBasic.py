@@ -12,11 +12,13 @@
 import glob
 import json
 import os
+import sys
 import utils
 
-from gearbox import Worker
+import gearbox
 from gearbox import Scoreboard
 from gearbox import StopWatch
+from gearbox import Worker
 
 
 class WorkerTestBasicPython(Worker):
@@ -60,7 +62,8 @@ class WorkerTestBasicPython(Worker):
             if os.path.exists(file_path):
                 resp.content(utils.file_get_contents(file_path))
             else:
-                raise ERR_NOT_FOUND("thing %(name)s not found" % locals())
+                msg = "thing %(name)s not found" % locals()
+                raise gearbox.ERR_NOT_FOUND(msg)
 
         return Worker.WORKER_SUCCESS
 
@@ -70,11 +73,11 @@ class WorkerTestBasicPython(Worker):
         resp.status().add_message("processing")
         args = job.arguments()
         if not args:
-            raise ERR_BAD_REQUEST("missing required resource name")
+            raise gearbox.ERR_BAD_REQUEST("missing required resource name")
 
         job_content = json.loads(job.content())
         if not "id" in job_content:
-            raise ERR_BAD_REQUEST("missing required \"id\" field")
+            raise gearbox.ERR_BAD_REQUEST("missing required \"id\" field")
 
         filename = os.path.join(self.DBDIR, args[0])
         utils.file_put_contents(filename, job.content())
@@ -118,7 +121,7 @@ class WorkerTestBasicPython(Worker):
                 out["stuff"] = job_content["stuff"]
                 utils.file_put_contents(filename, json.dumps(out))
             else:
-                raise ERR_NOT_FOUND("thing \"%s\" not found" % args[0])
+                raise gearbox.ERR_NOT_FOUND("thing \"%s\" not found" % args[0])
         resp.status().add_message("done")
         return Worker.WORKER_SUCCESS
 
@@ -134,13 +137,13 @@ class WorkerTestBasicPython(Worker):
 
         args = job.arguments()
         if not args:
-            raise ERR_BAD_REQUEST("missing required resource name")
+            raise gearbox.ERR_BAD_REQUEST("missing required resource name")
 
         filename = os.path.join(self.DBDIR, args[0])
         if os.path.exists(filename) and os.path.isfile(filename):
             os.unlink(filename)
         else:
-            raise ERR_NOT_FOUND("thing \"%s\" not found" % args[0])
+            raise gearbox.ERR_NOT_FOUND("thing \"%s\" not found" % args[0])
 
         resp.status().add_message("done")
         return Worker.WORKER_SUCCESS

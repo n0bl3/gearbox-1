@@ -160,7 +160,9 @@ class WorkerTestChainedPython(Worker):
                 if s.is_success():
                     responses.pop()
                 else:
-                    err_class = eval("ERR_CODE_" + s.code())
+                    err_class_name = "ERR_CODE_" + run_status.code()
+                    err_class = __import__('gearbox',
+                                           fromlist=[err_code_class_name])
                     msgs = s.messages()
                     raise err_class(msgs[0])
 
