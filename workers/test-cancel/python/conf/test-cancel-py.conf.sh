@@ -1,12 +1,12 @@
 #!/bin/sh
 cat <<EOF
 {
-    "component" : "testcancelperl",
+    "component" : "testcancelpy",
 
     "daemons" : [{
         "name" : "worker",
         "logname": "%{component}",
-        "command" : "$ROOT/bin/workerTestCancel.pl $ROOT/conf/gearbox/test-cancel-perl.conf",
+        "command" : "$ROOT/bin/workerTestCancel.pl $ROOT/conf/gearbox/test-cancel-py.conf",
         "count" : 1,
         "user" : "%{gearbox.user}"
     }]

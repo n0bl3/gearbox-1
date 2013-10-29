@@ -1,12 +1,12 @@
 #!/bin/sh
 cat <<EOF
 {
-    "component" : "testbasicperl",
+    "component" : "testbasicpy",
 
     "daemons" : [{
         "name" : "worker",
         "logname": "%{component}",
-        "command" : "$ROOT/bin/workerTestBasic.pl $ROOT/conf/gearbox/test-basic-perl.conf",
+        "command" : "$ROOT/bin/workerTestBasic.pl $ROOT/conf/gearbox/test-basic-py.conf",
         "count" : 1,
         "user" : "%{gearbox.user}"
     }]

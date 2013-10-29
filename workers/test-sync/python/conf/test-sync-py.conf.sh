@@ -1,12 +1,12 @@
 #!/bin/sh
 cat <<EOF
 {
-    "component" : "testsyncperl",
+    "component" : "testsyncpy",
 
     "daemons" : [{
         "name" : "worker",
         "logname": "%{component}",
-        "command" : "$ROOT/bin/workerTestSync.pl $ROOT/conf/gearbox/test-sync-perl.conf",
+        "command" : "$ROOT/bin/workerTestSync.pl $ROOT/conf/gearbox/test-sync-py.conf",
         "count" : 1,
         "user" : "%{gearbox.user}"
     }]

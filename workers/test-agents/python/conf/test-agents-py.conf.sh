@@ -2,12 +2,12 @@
 
 cat <<EOF
 {
-    "component" : "testagentsperl",
+    "component" : "testagentspy",
 
     "daemons" : [{
         "name" : "worker",
         "logname": "%{component}",
-        "command" : "$ROOT/bin/workerTestAgents.pl $ROOT/conf/gearbox/test-agents-perl.conf",
+        "command" : "$ROOT/bin/workerTestAgents.pl $ROOT/conf/gearbox/test-agents-py.conf",
         "count" : 6,
         "user" : "%{gearbox.user}"
     }]

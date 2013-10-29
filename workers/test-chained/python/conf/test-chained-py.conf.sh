@@ -1,7 +1,7 @@
 #!/bin/sh
 cat <<EOF
 {
-    "component" : "testchainedperl",
+    "component" : "testchainedpy",
 
     "daemons" : [{
         "name" : "worker",
